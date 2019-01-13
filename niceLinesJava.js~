@@ -1,0 +1,57 @@
+var x1,y1,x2,y2,wobble,move,you,me;
+
+function setup() {
+  
+  createCanvas(windowWidth, windowHeight);
+  
+  background(255);
+  
+  move = 5;
+  x = 0;
+  y = 0;
+  me =0;
+  you =0;
+  
+
+}
+function windowResized(){
+  resizeCanvas(windowWidth, windowHeight);
+}
+
+function draw() {
+  
+  me += 0.001;
+  you += 0.01;
+  
+  x += move;
+  
+  var c = sin(you);
+  var cMap = map(c, -1, 1, 100, 255);
+  
+  x1 = noise(sin(cos(x))) + (noise(-me, me, tan(sin(me)))*width);
+  y1 = noise(sin(y)) + (noise(-me,me,cos(-me))*height);
+  
+  stroke(255, cMap, -cMap, 50);
+  
+  fill(255, cMap, -cMap, 50);
+  
+  
+  rectMode(CENTER);
+  strokeWeight(2);
+ //line(x,y,x1,y1);
+ point(x1 + 200,y1 + 20, -100);
+ line(x1,y1,x1/2,y1/2,x1,-x1);
+ ellipse(y1/2,x1/2,10,10);
+  
+  
+  if(x >= width){
+   x = 0;
+   y += 400;
+   
+  }
+  if( y > height){
+    
+    y = 0;
+  }
+  
+}
